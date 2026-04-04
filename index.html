@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DeepFlow - House Price Predictor</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4facfe;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #007bff;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+
+        #error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🏠 DeepFlow Predictor</h1>
+
+    <input type="number" id="area" placeholder="Enter Area (sq ft)">
+    <input type="number" id="bedrooms" placeholder="Enter Bedrooms">
+
+    <button onclick="predict()">Predict Price</button>
+
+    <div id="result"></div>
+    <div id="error"></div>
+</div>
+
+<script>
+    async function predict() {
+        const area = document.getElementById("area").value;
+        const bedrooms = document.getElementById("bedrooms").value;
+
+        document.getElementById("result").innerText = "";
+        document.getElementById("error").innerText = "";
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    area: parseFloat(area),
+                    bedrooms: parseInt(bedrooms)
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.prediction !== undefined) {
+                document.getElementById("result").innerText =
+                    "💰 Predicted Price: " + data.prediction;
+            } else {
+                document.getElementById("error").innerText =
+                    "Error: " + data.error;
+            }
+
+        } catch (err) {
+            document.getElementById("error").innerText =
+                "❌ Cannot connect to API. Is FastAPI running?";
+        }
+    }
+</script>
+
+</body>
+</html>
