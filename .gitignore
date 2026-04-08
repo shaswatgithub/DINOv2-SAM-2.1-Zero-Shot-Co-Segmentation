@@ -1,0 +1,20 @@
+# ML models
+*.pt
+*.pth
+*.pkl
+*.bin
+*.safetensors
+
+# Videos
+*.mp4
+*.avi
+
+# Cache
+__pycache__/
+.ipynb_checkpoints/
+
+# outputs
+outputs/
+checkpoints/
+
+
