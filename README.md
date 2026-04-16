@@ -1,20 +1,4 @@
-Here's a **professional, detailed, and well-structured `README.md`** file perfect for your project.
 
-### How to use it:
-1. Create a new file in your project folder named **`README.md`**
-2. Copy and paste the entire content below into it.
-3. Save the file.
-4. Then run these commands to upload it:
-
-```bash
-git add README.md
-git commit -m "Add detailed README.md"
-git push origin main
-```
-
----
-
-### `README.md` Content (Copy from here):
 
 ```markdown
 # DINOv2 + SAM 2.1 Zero-Shot Co-Segmentation
