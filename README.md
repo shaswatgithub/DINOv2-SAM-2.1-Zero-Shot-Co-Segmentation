@@ -1,136 +1,167 @@
+<img width="1833" height="964" alt="image" src="https://github.com/user-attachments/assets/37174062-f2a7-4953-a865-f21d454b9373" />
 
+---
 
-```markdown
-# DINOv2 + SAM 2.1 Zero-Shot Co-Segmentation
+# 🔬 DINOv2 + SAM 2.1 Zero-Shot Co-Segmentation
 
-A **Streamlit web application** that performs **zero-shot co-segmentation** on two images using **DINOv2** for dense semantic features and **SAM 2.1** for promptable segmentation.
+🚀 **Live App:**
+👉 [https://shaswatgithub-dinov2-sam-2-1-zero-shot-co-segmentat-app1-hchqrt.streamlit.app/](https://shaswatgithub-dinov2-sam-2-1-zero-shot-co-segmentat-app1-hchqrt.streamlit.app/)
 
-This project automatically finds corresponding semantic points between two images and segments the common object without any training or fine-tuning.
+📦 **GitHub Repository:**
+👉 [https://github.com/shaswatgithub/DINOv2-SAM-2.1-Zero-Shot-Co-Segmentation](https://github.com/shaswatgithub/DINOv2-SAM-2.1-Zero-Shot-Co-Segmentation)
+
+---
+
+## 🧠 Overview
+
+This project presents a **zero-shot co-segmentation system** that automatically extracts the **common object** from two images — without any training, labels, or fine-tuning.
+
+It combines:
+
+* **DINOv2 (ViT-B/14)** → Dense semantic feature extraction
+* **SAM 2.1 (Hiera Large)** → Prompt-based segmentation
+
+The system identifies **corresponding semantic regions** across images and uses them as prompts to generate high-quality segmentation masks.
 
 ---
 
 ## ✨ Features
 
-- Zero-shot co-segmentation (no labels or training required)
-- Uses state-of-the-art DINOv2 (ViT-B/14) for cross-image similarity
-- SAM 2.1 (Hiera Large) for high-quality mask generation
-- Interactive Streamlit web interface
-- Real-time similarity heatmap visualization
-- Adjustable number of prompt points (Top-K)
-- Works on CPU and GPU
+* 🔍 **Zero-shot learning** (no training required)
+* 🧩 Cross-image **semantic correspondence**
+* 🎯 High-quality segmentation using SAM 2.1
+* 🌡️ Real-time **similarity heatmap visualization**
+* 🎛️ Adjustable **Top-K prompt points**
+* ⚡ Interactive **Streamlit interface**
+* 💻 Supports both **CPU and GPU**
 
 ---
 
 ## 🖼️ How It Works
 
-1. Upload two images containing the **same object**
-2. DINOv2 extracts dense patch features from both images
-3. Cross-image semantic similarity is computed to find corresponding regions
-4. Top-K most similar points are selected as prompts
-5. SAM 2.1 generates accurate segmentation masks for the common object in both images
+### Step-by-step pipeline:
+
+1. Upload **two images** containing a common object
+2. Extract **dense patch embeddings** using DINOv2
+3. Compute **cross-image cosine similarity**
+4. Select **Top-K most similar points**
+5. Use these points as **prompts for SAM 2.1**
+6. Generate segmentation masks for both images
 
 ---
 
-## 🚀 Demo & Deployment
+## ⚙️ System Architecture
 
-The app is ready to be deployed on **Streamlit Community Cloud**.
+```text
+Image A ──┐
+          ├── DINOv2 → Dense Features ──┐
+Image B ──┘                             │
+                                        ├── Similarity Matching
+                                        │       ↓
+                                        │   Top-K Points
+                                        │
+                                        └── SAM 2.1 → Segmentation Masks
+```
 
-**Live Demo**: (Add link after deployment)
+---
+
+## 🧪 Demo
+
+The app provides:
+
+* 📊 Side-by-side segmentation results
+* 🔥 Cross-image similarity heatmap
+* 📈 Basic analysis (variance, performance)
 
 ---
 
 ## 📁 Project Structure
 
-```
-DINOv2-SAM-2.1-Zero-Shot-Co-Segmentation/
-├── app1.py                 # Main Streamlit application
-├── requirements.txt        # Python dependencies
-├── README.md               # This file
-└── results/                # (Generated) Output images and masks
+```text
+📦 DINOv2-SAM-2.1-Zero-Shot-Co-Segmentation
+├── app.py                 # Streamlit web application
+├── requirements.txt       # Dependencies
+├── README.md              # Documentation
+├── assets/                # Demo images / visuals (optional)
 ```
 
 ---
 
-## 🛠️ Installation & Local Setup
+## 🛠️ Installation
 
-### 1. Clone the repository
 ```bash
 git clone https://github.com/shaswatgithub/DINOv2-SAM-2.1-Zero-Shot-Co-Segmentation.git
 cd DINOv2-SAM-2.1-Zero-Shot-Co-Segmentation
-```
 
-### 2. Create virtual environment (Recommended)
-```bash
-python -m venv venv
-source venv/bin/activate    # On Linux/Mac
-# venv\Scripts\activate     # On Windows
-```
-
-### 3. Install dependencies
-```bash
 pip install -r requirements.txt
-```
-
-### 4. Run the app locally
-```bash
-streamlit run app1.py
 ```
 
 ---
 
-## 📦 Requirements
+## ▶️ Run Locally
 
-- Python 3.10+
-- PyTorch
-- Transformers (Hugging Face)
-- OpenCV
-- Streamlit
-- DINOv2 & SAM 2.1 models (automatically downloaded on first run)
-
-See `requirements.txt` for full list.
+```bash
+streamlit run app.py
+```
 
 ---
 
 ## 🎛️ Usage
 
-1. Open the app
-2. Upload **Image 1** and **Image 2**
-3. Adjust the **Top-K** prompt points (default: 10)
-4. Click **"Run Co-Segmentation"**
-5. View:
-   - Original images
-   - Segmented results with overlay
-   - Cross-image similarity heatmap
-   - Download predicted masks
+1. Upload **two images containing the same object**
+2. Adjust **Top-K prompt points**
+3. Click **Run Co-Segmentation**
+4. View:
 
-**Tip**: Best results when both images contain the same prominent object with good lighting and minimal occlusion.
+   * Segmentation results
+   * Similarity heatmap
+   * Performance analysis
 
 ---
 
-## 🧠 Technical Details
+## 📊 Technical Insights
 
-- **Feature Extractor**: DINOv2 ViT-B/14 (dense patch tokens)
-- **Segmentation Model**: SAM 2.1 Hiera Large
-- **Similarity Method**: Normalized cosine similarity + max pooling
-- **Prompt Strategy**: Top-K highest similarity points
-- **Device Support**: Automatic CPU / CUDA detection
+* Uses **patch-level feature matching** instead of pixel-level
+* Robust to:
+
+  * Scale variations
+  * Lighting differences
+  * Background clutter
+
+### Limitation:
+
+* May struggle when:
+
+  * Objects are extremely small
+  * Background dominates similarity
+  * No clear semantic correspondence exists
 
 ---
 
-## 📊 Future Improvements
+## 🔮 Future Work
 
-- Add SIFT baseline comparison
-- Support for multiple objects
-- Ground truth evaluation metrics (IoU, Dice, F1)
-- Batch processing
-- Gradio version
-- GPU acceleration optimizations
+* Multi-object co-segmentation
+* Video co-segmentation
+* Adaptive prompt selection
+* Faster inference optimization
 
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to open issues or submit pull requests.
+
+---
+
+## 📜 License
+
+SHASWAT
 ---
 
 ## 👨‍💻 Author
 
-**Shaswat**  
-Project for EE655 (Computer Vision / Image Processing)
+**Shaswat**
+Project developed as part of **EE655 (Computer Vision / AI coursework)**
 
 ---
